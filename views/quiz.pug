@@ -2,4 +2,21 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  if show
+    form(method='post')
+      p Jaka jest Twoja ulubiona pora roku?
+        ul
+          each item in data
+            li 
+              label=item.title 
+              input(type='radio' name='quiz' value=item._id)
+        input(type='submit' value='Zagłosuj')
+        p Aby zobaczyć wyniki oddaj głos
+  else 
+    h1 Już zagłosowałeś!
+    p Wyniki:
+    ul 
+      each item in data
+        li #{item.title} - Ilość głosów: #{item.vote} (#{(item.vote/sum*100).toFixed()}%)
+
+    p Oddano #{sum} głosów.
